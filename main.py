@@ -2,7 +2,10 @@ import pymongo
 from pymongo import MongoClient
 import re
 from bson.code import Code
+import time as time_
 
+def millis():
+    return int(round(time_.time() * 1000))
 
 def count_distinct(col, attr):
     result = col.aggregate([ 
@@ -92,32 +95,50 @@ def get_top_polarity(col, polarity, limit):
     return result
 
 
-client = MongoClient("mongodb://172.17.0.2:27017")
-db = client.assignment_2
+#client = MongoClient("mongodb://172.17.0.2:27017")
+#db = client.assignment_2
+#tweets = db.tweets_big
+
+client = MongoClient()
+db = client.social_net
 tweets = db.tweets
 
+start = millis()
 print('Distinct users: ' + str(count_distinct(tweets, 'user')))
+print('This took ' + str(millis() - start) + ' MS')
 
 print("\nUsers mentioning others the most:")
-
+start = millis()
 for user, count in get_most_mentioning(tweets, 'text', 10):
     print(user + ' - ' + str(count) + ' mentions')
+print('This took ' + str(millis() - start) + ' MS')
 
 print('\nMost mentioned users')
-for item in get_most_mentioned(tweets, 'text', 5):
-    print(item['_id'] + ' - ' + str(int(item['value'])))
+start = millis()
+#for item in get_most_mentioned(tweets, 'text', 5):
+#    print(item['_id'] + ' - ' + str(int(item['value'])))
+#print('This took ' + str(millis() - start) + ' MS')
+print('===============================================')
+print('This section was commented out because its slow')
+print('===============================================')
 
 print('\nMost active user(by number of tweets)')
+start  = millis()
 for item in get_most_active(tweets, 'user', 5):
     print(item['_id'] + ' - ' + str(item['count']) + ' tweets')
+print('This took ' + str(millis() - start) + ' MS')
 
 print('\nMost grumpy users:')
+start = millis()
 for item in get_top_polarity(tweets, 0, 5):
     print(item['_id']['user'] + ' - ' + str(item['count']) + ' negative tweets')
+print('This took ' + str(millis() - start) + ' MS')
 
 print('\nMost happy users:')
+start = millis()
 for item in get_top_polarity(tweets, 4, 5):
     print(item['_id']['user'] + ' - ' + str(item['count']) + ' positive tweets')
+print('This took ' + str(millis() - start) + ' MS')
 
 
 client.close()
