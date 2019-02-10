@@ -7,7 +7,7 @@ The script assumes you already have the twitter data. If not, see [data section]
 
 When you run main.py it will print out the answers to questions asked in the [assignment](https://github.com/datsoftlyngby/soft2019spring-databases/blob/master/lecture_notes/02-Intro_to_MongoDB.ipynb). The script contains methods to get the results for all of them. See example output from [my results](#results)
 
-**Warning!** Finding the most mentioned users will take **AN UNREASONABLY LONG** time. By default that part of the script is commented out. If you really want to run that monstrosity, go into the script and uncomment code after the `Most mentioned users` print. But consider yourself warned. 
+**Warning!** Finding the most mentioned users will take **AN UNREASONABLY LONG** time. Consider this part of the assignment not completed. By default that part of the script is commented out. If you really want to run that monstrosity, go into the script and uncomment code after the `Most mentioned users` print. But consider yourself warned. 
 
 # Configuration
 
@@ -57,3 +57,50 @@ pip3 install pymongo
 # Results
 
 This is sample output from me running it a docker container. Your experience may vary.
+
+```
+Distinct users: 659774
+This took 3401 MS
+
+Users mentioning others the most:
+cchastain - 12 mentions
+janeylicious - 11 mentions
+HalfassBackward - 11 mentions
+esoterismo - 11 mentions
+DaRevolutionary - 11 mentions
+Mia_R - 11 mentions
+dottibailey - 11 mentions
+indyval - 11 mentions
+kittylaney - 11 mentions
+jobrich - 11 mentions
+This took 11209 MS
+
+Most mentioned users
+===============================================
+This section was commented out because its slow
+===============================================
+
+Most active user(by number of tweets)
+lost_dog - 549 tweets
+webwoke - 345 tweets
+tweetpet - 310 tweets
+SallytheShizzle - 281 tweets
+VioletsCRUK - 279 tweets
+This took 4371 MS
+
+Most grumpy users:
+lost_dog - 549 negative tweets
+tweetpet - 310 negative tweets
+webwoke - 264 negative tweets
+mcraddictal - 210 negative tweets
+wowlew - 210 negative tweets
+This took 3638 MS
+
+Most happy users:
+what_bugs_u - 246 positive tweets
+DarkPiano - 231 positive tweets
+VioletsCRUK - 218 positive tweets
+tsarnick - 212 positive tweets
+keza34 - 211 positive tweets
+This took 3719 MS
+```
